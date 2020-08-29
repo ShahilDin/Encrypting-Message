@@ -1,0 +1,70 @@
+// Prac.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+#include<string>
+#include <vector>
+#include "log.h"
+#include <cctype>
+#include <cstring>
+
+
+int main()
+{
+
+	std::string message;
+	std::string alphabet{ "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMONPQRSTUVWXYZ" };
+	std::string key{ "ZXCVBNMASDFGHJKLPOIUYTREWQqwertyuiopasdfghjklzxcvbnm" };
+
+	std::string encrpted_message{};
+
+
+	std::cout << "Enter Message Here" << std::endl;
+	std::getline(std::cin, message);
+
+
+
+
+	std::cout << "Encrypting Message.....\n";
+
+	for (char c: message)
+	{
+		size_t position = alphabet.find(c);
+		if (position != std::string::npos)
+		{
+			char ch{key.at(position)};
+			encrpted_message += ch;
+		}
+		else
+		{
+			encrpted_message += c;
+		}
+		
+	}
+
+	std::cout << encrpted_message << std::endl;
+
+	std::string dmessage{};
+
+	std::cout << "\nDecrypting Message...\n";
+
+	for (char c : encrpted_message)
+	{
+		size_t position = key.find(c);
+		if (position != std::string::npos)
+		{
+			char ch{ alphabet.at(position) };
+			dmessage += ch;
+		}
+		else
+		{
+			dmessage += c;
+		}
+	}
+
+	std::cout << "\n" <<dmessage;
+
+
+	
+	return 0;
+}
